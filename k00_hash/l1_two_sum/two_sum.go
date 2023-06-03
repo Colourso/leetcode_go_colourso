@@ -6,7 +6,7 @@ package l1_two_sum
 func TwoSum(nums []int, target int) []int {
 	numMap := make(map[int]int)
 	for index, n := range nums {
-		if key1, ok := numMap[target - n]; ok {
+		if key1, ok := numMap[target-n]; ok {
 			return []int{key1, index}
 		}
 		numMap[n] = index
