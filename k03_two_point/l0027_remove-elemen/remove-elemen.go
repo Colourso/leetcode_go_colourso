@@ -20,6 +20,7 @@ package l0027_remove_elemen
 //链接：https://leetcode.cn/problems/remove-element
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
+// removeElement 不保证剩余有序
 func removeElement(nums []int, val int) int {
 	if len(nums) <= 0 {
 		return 0
@@ -33,10 +34,8 @@ func removeElement(nums []int, val int) int {
 		}
 
 		// 直接与右指针替换
-		if left < right {
-			tmp := nums[right]
-			nums[right] = nums[left]
-			nums[left] = tmp
+		if left < right { // 边界条件！
+			nums[left], nums[right] = nums[right], nums[left]
 			right--
 		}
 	}
@@ -51,3 +50,16 @@ func removeElement(nums []int, val int) int {
 // 原地移除 —> 如果一个元素匹配再移除的话，就要连续挪动后面的元素，最坏的时间复杂度接近o（n^2）
 //
 // 但是双指针进行替换的话，就没有这些担心,空间位置上的直接替换，没有什么损伤
+
+// removeElementV2 保证剩余有序
+func removeElementV2(nums []int, val int) int {
+	// 快慢指针写法，核心是谁去保证遍历的完成
+	left := 0
+	for right := 0; right < len(nums); right++ {
+		if val != nums[right] {
+			nums[left] = nums[right]
+			left++
+		}
+	}
+	return left
+}
