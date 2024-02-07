@@ -12,6 +12,8 @@
 | k03  | two_point      | 双指针  |
 | k04  | prefix_sum     | 前缀和  |
 | k05  | linked_list    | 链表   |
+| k06  | back_tracking  | 回溯   |
+| K07  | binary_tree    | 二叉树  |
 
 
 ## 如何单元测试(一)
