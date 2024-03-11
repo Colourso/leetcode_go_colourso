@@ -72,3 +72,33 @@ func getMax(a, b int) int {
 	}
 	return b
 }
+
+func Beibao01V2() int {
+	M, N := 0, 0
+	fmt.Scanln(&M, &N)
+	weight := make([]int, M)
+	value := make([]int, M)
+	for i := 0; i < M; i++ {
+		fmt.Scan(&weight[i])
+	}
+	for i := 0; i < M; i++ {
+		fmt.Scan(&value[i])
+	}
+
+	dp := make([]int, N+1)
+	for i := range dp {
+		dp[i] = 0
+	}
+
+	// 先物品、后背包：先看物品0在背包产生的最大价值，然后看物品1累计后的，一直继续...
+	// 滚动数组，使用一维数组
+	// 为什么要倒序遍历呢？上一层的 dp[j] 到了这一层 dp[j]
+	// 递推数组要求是【依赖前一个数据】（那么前一个数据就要最后更新），正序遍历的话前一个数据提前被更新了，就达不到依赖的效果了
+	for i := 0; i < M; i++ {
+		for j := N; j >= weight[i]; j-- {
+			dp[j] = getMax(dp[j], dp[j-weight[i]]+value[i])
+		}
+	}
+
+	return dp[N]
+}
